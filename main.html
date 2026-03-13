@@ -8,7 +8,7 @@
 <body>
 
   <div class="wrapper">
-    <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" controls></video>
+    <video class="flex" width="765" height="430" src="https://www.w3schools.com/html/mov_bbb.mp4" controls></video>
     <div class="speed">
       <div class="speed-bar">1×</div>
     </div>
@@ -16,6 +16,35 @@
 
 <script  src="./script.js">
   //Your code goes here
+	    // Get the elements
+    const video = document.querySelector('.flex');
+    const speed = document.querySelector('.speed');
+    const speedBar = document.querySelector('.speed-bar');
+
+    // Function to handle speed change based on mouse position
+    function handleSpeed(e) {
+      // Calculate the position relative to the speed container
+      const y = e.pageY - this.offsetTop;
+      const percent = y / this.offsetHeight;
+      
+      // Set speed range from 0.4 to 4 (min to max)
+      const min = 0.4;
+      const max = 4;
+      const playbackRate = percent * (max - min) + min;
+      
+      // Update the speed bar height and text
+      speedBar.style.height = Math.round(percent * 100) + '%';
+      speedBar.textContent = playbackRate.toFixed(2) + '×';
+      
+      // Update video playback rate
+      video.playbackRate = playbackRate;
+    }
+
+    // Add event listeners
+    speed.addEventListener('mousemove', handleSpeed);
+    
+    // Optional: Add click handler as well
+    speed.addEventListener('click', handleSpeed);
 </script>
 </body>
 </html>
